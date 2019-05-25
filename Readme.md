@@ -1,4 +1,4 @@
-# Flamingo MySQL module
+# Flamingo MySQL module [![Build Status](https://travis-ci.org/tessig/flamingo-mysql.svg?branch=master)](https://travis-ci.org/tessig/flamingo-mysql)
 
 This flamingo module provides a simple MySQL implementation by wrapping 
 github.com/jmoiron/sqlx and a migration tool by wrapping github.com/golang-migrate/migrate 
