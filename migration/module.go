@@ -41,9 +41,10 @@ func (m *Module) Configure(injector *dingo.Injector) {
 // DefaultConfig for Migration module
 func (m *Module) DefaultConfig() config.Map {
 	return config.Map{
-		"migrations.automigrate": false,
-		"migrations.directory":   "sql/migrations/",
-		"seeds.directory":        "sql/seeds/",
+		"migrations.automigrate":               false,
+		"migrations.directory":                 "sql/migrations/",
+		"seeds.directory":                      "sql/seeds/",
+		"db.connectionOptions.multiStatements": "true", // required for migration and seed scripts
 	}
 }
 

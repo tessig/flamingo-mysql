@@ -18,6 +18,11 @@ db:
   databaseName: "databaseName"
   user: "user"
   password: "password"
+  maxConnectionLifetime: 0 # in seconds, 0 means to set nothing, negative values mean unlimited
+  # a set of additional connection options which are added as parameters to the DB URL
+  connectionOptions: 
+    myOption1: "myValue1" # all option values must be strings
+    myOption2: "false"
 ```
 
 ## Migration Module
@@ -39,6 +44,9 @@ migrations:
 seeds:
   directory:   "sql/seeds/",
 ```
+
+The Migration Module also adds `"db.connectionOptions.multiStatements": "true"` to the db configuration 
+to handle migration and seed scripts.
 
 ### Migration
 
