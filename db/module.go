@@ -40,7 +40,7 @@ type (
 
 // Configure module
 func (m *Module) Configure(injector *dingo.Injector) {
-	injector.Bind((*DB)(nil)).ToProvider(dbProvider).AsEagerSingleton()
+	injector.Bind((*DB)(nil)).ToProvider(dbProvider).AsEagerSingleton().In(dingo.ChildSingleton)
 	flamingo.BindEventSubscriber(injector).To(&ShutdownSubscriber{})
 }
 
