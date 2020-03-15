@@ -1,15 +1,14 @@
 language: go
 
 go:
-  - 1.12.x
-
-env:
-  - GO111MODULE=on
+  - 1.x
 
 install: true
 
 script:
-  - go get -u golang.org/x/lint/golint
-  - golint -set_exit_status $(go list ./...)
-  - go test -v -vet=all ./...
-  - go test -v -race ./...
+  - set -e
+  - fmt=$(gofmt -l .)
+  - test -z $fmt || (echo "please run gofmt" ; echo $fmt ; exit 1)
+  - go run golang.org/x/lint/golint -set_exit_status $(go list ./...)
+  - go generate ./...
+  - go test -race -vet=all -test.count=10 ./...
