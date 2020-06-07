@@ -8,6 +8,8 @@ import (
 	"flamingo.me/flamingo/v3/framework/config"
 	"flamingo.me/flamingo/v3/framework/flamingo"
 	"github.com/spf13/cobra"
+	// we need the file source only when the migrator module is included
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 
 	"github.com/tessig/flamingo-mysql/db"
 	"github.com/tessig/flamingo-mysql/migration/application"

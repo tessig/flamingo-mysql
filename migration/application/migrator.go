@@ -4,11 +4,8 @@ import (
 	"os"
 
 	"flamingo.me/flamingo/v3/framework/flamingo"
-	"github.com/golang-migrate/migrate"
-	"github.com/golang-migrate/migrate/database/mysql"
-
-	// we need the file source only when the migrator module is included
-	_ "github.com/golang-migrate/migrate/source/file"
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/golang-migrate/migrate/v4/database/mysql"
 
 	"github.com/tessig/flamingo-mysql/db"
 )

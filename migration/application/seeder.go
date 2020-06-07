@@ -6,8 +6,6 @@ import (
 	"path/filepath"
 
 	"flamingo.me/flamingo/v3/framework/flamingo"
-	// we need the file source only when the migrator module is included
-	_ "github.com/golang-migrate/migrate/source/file"
 
 	"github.com/tessig/flamingo-mysql/db"
 )
