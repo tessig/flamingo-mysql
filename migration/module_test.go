@@ -9,9 +9,7 @@ import (
 )
 
 func TestModule_Configure(t *testing.T) {
-	module := new(migration.Module)
-
-	if err := config.TryModules(module.DefaultConfig(), module); err != nil {
+	if err := config.TryModules(nil, new(migration.Module)); err != nil {
 		t.Error(err)
 	}
 }

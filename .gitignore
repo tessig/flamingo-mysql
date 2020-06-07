@@ -1,5 +1,7 @@
 #IDE
 .idea
+.vscode
+/lsp/
 
 # Binaries for programs and plugins
 *.exe

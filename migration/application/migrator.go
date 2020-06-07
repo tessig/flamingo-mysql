@@ -44,8 +44,8 @@ func (m *Migrator) Inject(
 	db db.DB,
 	logger flamingo.Logger,
 	conf *struct {
-		DatabaseName       string `inject:"config:db.databaseName,optional"`
-		MigrationDirectory string `inject:"config:migrations.directory"`
+		DatabaseName       string `inject:"config:mysql.db.databaseName,optional"`
+		MigrationDirectory string `inject:"config:mysql.migration.directory"`
 	},
 ) {
 	m.db = db

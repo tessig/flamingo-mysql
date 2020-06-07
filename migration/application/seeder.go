@@ -24,7 +24,7 @@ func (s *Seeder) Inject(
 	db db.DB,
 	logger flamingo.Logger,
 	conf *struct {
-		SeedsDirectory string `inject:"config:seeds.directory"`
+		SeedsDirectory string `inject:"config:mysql.seed.directory"`
 	},
 ) {
 	s.db = db

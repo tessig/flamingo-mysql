@@ -28,13 +28,13 @@ type (
 	}
 
 	dbConfig struct {
-		Host                  string     `inject:"config:db.host,optional"`
-		Port                  string     `inject:"config:db.port,optional"`
-		DatabaseName          string     `inject:"config:db.databaseName,optional"`
-		Username              string     `inject:"config:db.user,optional"`
-		Password              string     `inject:"config:db.password,optional"`
-		MaxConnectionLifetime float64    `inject:"config:db.maxConnectionLifetime,optional"`
-		ConnectionOptions     config.Map `inject:"config:db.connectionOptions,optional"`
+		Host                  string     `inject:"config:mysql.db.host,optional"`
+		Port                  string     `inject:"config:mysql.db.port,optional"`
+		DatabaseName          string     `inject:"config:mysql.db.databaseName,optional"`
+		Username              string     `inject:"config:mysql.db.user,optional"`
+		Password              string     `inject:"config:mysql.db.password,optional"`
+		MaxConnectionLifetime float64    `inject:"config:mysql.db.maxConnectionLifetime,optional"`
+		ConnectionOptions     config.Map `inject:"config:mysql.db.connectionOptions,optional"`
 	}
 )
 
@@ -44,13 +44,32 @@ func (m *Module) Configure(injector *dingo.Injector) {
 	flamingo.BindEventSubscriber(injector).To(&ShutdownSubscriber{})
 }
 
-// DefaultConfig for the module
-func (m *Module) DefaultConfig() config.Map {
-	return config.Map{
-		"db.connectionOptions": config.Map{
-			"parseTime": "true", // required for correct handling of datetime in Scan
-		},
+// FlamingoLegacyConfigAlias maps legacy config entries to new ones
+func (m *Module) FlamingoLegacyConfigAlias() map[string]string {
+	return map[string]string{
+		"db": "mysql.db",
 	}
+}
+
+// CueConfig for the module
+func (m *Module) CueConfig() string {
+	return `
+mysql: {
+	DefaultConnectionOptions:: {
+		parseTime: "true"
+	}
+	db: {
+		host: string | *"localhost"
+		port: string | *"3306"
+		databaseName: string | *""
+		user: string | *""
+		password: string | *""
+		maxConnectionLifetime: float | *0
+		connectionOptions: DefaultConnectionOptions & {
+			[string]: string
+		}
+	}
+}`
 }
 
 func dbProvider(cfg *dbConfig, logger flamingo.Logger) DB {

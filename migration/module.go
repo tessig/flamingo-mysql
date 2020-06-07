@@ -5,7 +5,6 @@ import (
 
 	"flamingo.me/dingo"
 	"flamingo.me/flamingo/v3/framework/cmd"
-	"flamingo.me/flamingo/v3/framework/config"
 	"flamingo.me/flamingo/v3/framework/flamingo"
 	"github.com/spf13/cobra"
 	// we need the file source only when the migrator module is included
@@ -25,7 +24,7 @@ type (
 // Inject dependencies
 func (m *Module) Inject(
 	cfg *struct {
-		AutoMigrate bool `inject:"config:migrations.automigrate"`
+		AutoMigrate bool `inject:"config:mysql.migration.automigrate"`
 	},
 ) {
 	m.autoMigrate = cfg.AutoMigrate
@@ -40,14 +39,27 @@ func (m *Module) Configure(injector *dingo.Injector) {
 	}
 }
 
-// DefaultConfig for Migration module
-func (m *Module) DefaultConfig() config.Map {
-	return config.Map{
-		"migrations.automigrate":               false,
-		"migrations.directory":                 "sql/migrations/",
-		"seeds.directory":                      "sql/seeds/",
-		"db.connectionOptions.multiStatements": "true", // required for migration and seed scripts
+// FlamingoLegacyConfigAlias maps legacy config entries to new ones
+func (m *Module) FlamingoLegacyConfigAlias() map[string]string {
+	return map[string]string{
+		"migrations": "mysql.migration",
+		"seeds":      "mysql.seed",
 	}
+}
+
+// CueConfig for the module
+func (m *Module) CueConfig() string {
+	return `
+mysql: {
+	db: connectionOptions: multiStatements: "true" //required for migration and seed scripts  
+	migration: {
+		automigrate: bool | *false
+		directory: string | *"sql/migrations/"
+	}
+	seed: {
+		directory: string | *"sql/seeds/"
+	}
+}`
 }
 
 // Depends on other modules
