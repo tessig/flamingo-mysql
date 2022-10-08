@@ -1,6 +1,6 @@
 module github.com/tessig/flamingo-mysql
 
-go 1.18
+go 1.19
 
 require (
 	flamingo.me/dingo v0.2.9

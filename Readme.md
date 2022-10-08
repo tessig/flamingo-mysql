@@ -66,12 +66,12 @@ scripts in lexical order (see [filepath.Walk](https://godoc.org/path/filepath#Wa
 ```
 sql
 ├── migrations
-│   ├── 1_usertable.up.sql
-│   ├── 1_usertable.down.sql
-│   ├── 2_other-table.up.sql
-│   ├── 2_other-table.down.sql
-│   ├── 3_usertable-addColumn.up.sql
-│   └── 3_usertable-addColumn.down.sql
+│   ├── 1_usertable.up.sql
+│   ├── 1_usertable.down.sql
+│   ├── 2_other-table.up.sql
+│   ├── 2_other-table.down.sql
+│   ├── 3_usertable-addColumn.up.sql
+│   └── 3_usertable-addColumn.down.sql
 └── seeds
     ├── users.sql
     └── other-data.sql
