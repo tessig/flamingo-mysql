@@ -13,9 +13,12 @@ import (
 )
 
 func TestShutdownSubscriber_Notify(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		event flamingo.Event
 	}
+
 	tests := []struct {
 		name      string
 		args      args
@@ -36,8 +39,11 @@ func TestShutdownSubscriber_Notify(t *testing.T) {
 			wantClose: false,
 		},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 
 			mockDB, mock, err := sqlmock.New()
 			if err != nil {

@@ -27,6 +27,7 @@ func (s *StartUpMigrations) Inject(
 func (s *StartUpMigrations) Notify(_ context.Context, event flamingo.Event) {
 	if _, ok := event.(*flamingo.StartupEvent); ok {
 		s.logger.Info("Run auto migrations...")
+
 		err := s.migrator.Up(nil)
 		if err != nil {
 			panic(err)

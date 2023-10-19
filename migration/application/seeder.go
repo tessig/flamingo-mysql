@@ -1,7 +1,7 @@
 package application
 
 import (
-	"io/ioutil"
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -36,10 +36,10 @@ func (s *Seeder) Inject(
 func (s *Seeder) Seed() error {
 	logger := s.logger.WithField(flamingo.LogKeyCategory, "seeds")
 
-	return filepath.Walk(s.seedsDirectory, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(s.seedsDirectory, func(path string, info os.FileInfo, err error) error {
 		if !info.IsDir() && filepath.Ext(info.Name()) == ".sql" {
 			logger.Info("Seed file %s ...", info.Name())
-			data, err := ioutil.ReadFile(path)
+			data, err := os.ReadFile(path)
 			if err != nil {
 				logger.Fatal("Problem while reading file content of %s:", info.Name())
 				panic(err)
@@ -52,4 +52,9 @@ func (s *Seeder) Seed() error {
 
 		return nil
 	})
+	if err != nil {
+		return fmt.Errorf("seeding failed: %w", err)
+	}
+
+	return nil
 }
