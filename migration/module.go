@@ -2,6 +2,7 @@ package migration
 
 import (
 	"errors"
+	"fmt"
 
 	"flamingo.me/dingo"
 	"flamingo.me/flamingo/v3/framework/cmd"
@@ -21,6 +22,10 @@ type (
 	}
 )
 
+var (
+	ErrArgumentMissing = errors.New("argument up or down missing")
+)
+
 // Inject dependencies
 func (m *Module) Inject(
 	cfg *struct {
@@ -34,6 +39,7 @@ func (m *Module) Inject(
 func (m *Module) Configure(injector *dingo.Injector) {
 	injector.BindMulti(new(cobra.Command)).ToProvider(migrateProvider)
 	injector.BindMulti(new(cobra.Command)).ToProvider(seedProvider)
+
 	if m.autoMigrate {
 		flamingo.BindEventSubscriber(injector).To(&application.StartUpMigrations{})
 	}
@@ -49,6 +55,7 @@ func (m *Module) FlamingoLegacyConfigAlias() map[string]string {
 
 // CueConfig for the module
 func (m *Module) CueConfig() string {
+	// language=cue
 	return `
 mysql: {
 	db: connectionOptions: multiStatements: "true" //required for migration and seed scripts  
@@ -73,11 +80,12 @@ func (m *Module) Depends() []dingo.Module {
 func exactValidArgs(cmd *cobra.Command, args []string) error {
 	err := cobra.ExactArgs(1)(cmd, args)
 	if err != nil {
-		return err
+		return fmt.Errorf("need exact 1 argument: %w", err)
 	}
+
 	err = cobra.OnlyValidArgs(cmd, args)
 	if err != nil {
-		return err
+		return fmt.Errorf("call contains invalid arguments: %w", err)
 	}
 
 	return nil
@@ -97,16 +105,27 @@ func migrateProvider(migrator *application.Migrator) *cobra.Command {
 
 			switch mode := args[0]; mode {
 			case "up":
-				return migrator.Up(steps)
+				err := migrator.Up(steps)
+				if err != nil {
+					return fmt.Errorf("up migration failed: %w", err)
+				}
+
+				return nil
 			case "down":
-				return migrator.Down(steps)
+				err := migrator.Down(steps)
+				if err != nil {
+					return fmt.Errorf("down migration failed: %w", err)
+				}
+
+				return nil
 			default:
-				return errors.New("argument up or down missing")
+				return ErrArgumentMissing
 			}
 		},
 		Args:      exactValidArgs,
 		ValidArgs: []string{"up", "down"},
 	}
+
 	migrateCMD.Flags().IntP("steps", "s", 0, "Steps to migrate")
 
 	return migrateCMD
@@ -117,9 +136,15 @@ func seedProvider(seeder *application.Seeder) *cobra.Command {
 		Use:   "seed",
 		Short: "Run all sql files from sql/seeds on the database",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return seeder.Seed()
+			err := seeder.Seed()
+			if err != nil {
+				return fmt.Errorf("seeding failed: %w", err)
+			}
+
+			return nil
 		},
 		Args: cobra.NoArgs,
 	}
+
 	return seedCMD
 }

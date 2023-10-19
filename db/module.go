@@ -28,13 +28,13 @@ type (
 	}
 
 	dbConfig struct {
+		ConnectionOptions     config.Map `inject:"config:mysql.db.connectionOptions,optional"`
 		Host                  string     `inject:"config:mysql.db.host,optional"`
 		Port                  string     `inject:"config:mysql.db.port,optional"`
 		DatabaseName          string     `inject:"config:mysql.db.databaseName,optional"`
 		Username              string     `inject:"config:mysql.db.user,optional"`
 		Password              string     `inject:"config:mysql.db.password,optional"`
 		MaxConnectionLifetime float64    `inject:"config:mysql.db.maxConnectionLifetime,optional"`
-		ConnectionOptions     config.Map `inject:"config:mysql.db.connectionOptions,optional"`
 	}
 )
 
@@ -84,9 +84,13 @@ func dbProvider(cfg *dbConfig, logger flamingo.Logger) DB {
 
 	if len(cfg.ConnectionOptions) > 0 {
 		options := url.Values{}
+
 		for key, value := range cfg.ConnectionOptions {
-			options.Set(key, value.(string))
+			if v, ok := value.(string); ok {
+				options.Set(key, v)
+			}
 		}
+
 		dataSourceURL += "?" + options.Encode()
 	}
 

@@ -1,6 +1,8 @@
 package application
 
 import (
+	"errors"
+	"fmt"
 	"os"
 
 	"flamingo.me/flamingo/v3/framework/flamingo"
@@ -15,18 +17,20 @@ type (
 	Migrator struct {
 		db                 db.DB
 		logger             flamingo.Logger
+		migration          *migrate.Migrate
 		databaseName       string
 		migrationDirectory string
-		migration          *migrate.Migrate
 	}
 )
 
 func migrationFactory(m *Migrator) *migrate.Migrate {
 	conn := m.db.Connection()
+
 	driver, err := mysql.WithInstance(conn.DB, &mysql.Config{})
 	if err != nil {
 		panic(err)
 	}
+
 	migration, err := migrate.NewWithDatabaseInstance(
 		"file://"+m.migrationDirectory,
 		m.databaseName,
@@ -51,9 +55,11 @@ func (m *Migrator) Inject(
 	m.db = db
 	m.logger = logger
 	m.databaseName = conf.DatabaseName
+
 	if dbname, ok := os.LookupEnv("DBNAME"); ok {
 		m.databaseName = dbname
 	}
+
 	m.migrationDirectory = conf.MigrationDirectory
 }
 
@@ -68,10 +74,12 @@ func (m *Migrator) Up(steps *int) error {
 // and will migrate step versions down or applying all down migrations if step is not given
 func (m *Migrator) Down(steps *int) error {
 	m.migration = migrationFactory(m)
+
 	if steps != nil {
 		tmpSteps := -*steps
 		steps = &tmpSteps
 	}
+
 	return m.runMigration(m.migration.Down, steps)
 }
 
@@ -88,7 +96,7 @@ func (m *Migrator) runMigration(migratorFunc func() error, steps *int) error {
 		err = m.migration.Steps(*steps)
 	}
 
-	if err == migrate.ErrNoChange {
+	if errors.Is(err, migrate.ErrNoChange) {
 		logger.Info("migrations: No change")
 		return nil
 	} else if err != nil {
@@ -97,5 +105,5 @@ func (m *Migrator) runMigration(migratorFunc func() error, steps *int) error {
 
 	logger.Info("Migrations complete")
 
-	return err
+	return fmt.Errorf("db migration failed: %w", err)
 }
