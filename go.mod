@@ -8,7 +8,7 @@ require (
 	flamingo.me/dingo v0.2.10
 	flamingo.me/flamingo/v3 v3.8.1
 	github.com/DATA-DOG/go-sqlmock v1.5.2
-	github.com/go-sql-driver/mysql v1.7.1
+	github.com/go-sql-driver/mysql v1.8.1
 	github.com/golang-migrate/migrate/v4 v4.16.2
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/spf13/cobra v1.8.0
@@ -17,6 +17,7 @@ require (
 
 require (
 	cuelang.org/go v0.0.15 // indirect
+	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/cockroachdb/apd/v2 v2.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
