@@ -7,7 +7,7 @@ toolchain go1.22.3
 require (
 	flamingo.me/dingo v0.2.10
 	flamingo.me/flamingo/v3 v3.8.1
-	github.com/DATA-DOG/go-sqlmock v1.5.0
+	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/golang-migrate/migrate/v4 v4.16.2
 	github.com/jmoiron/sqlx v1.3.5
