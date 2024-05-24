@@ -1,4 +1,10 @@
-# Flamingo MySQL module [![Build Status](https://travis-ci.org/tessig/flamingo-mysql.svg?branch=master)](https://travis-ci.org/tessig/flamingo-mysql)
+# Flamingo MySQL module
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/tessig/flamingo-mysql)](https://goreportcard.com/report/github.com/tessig/flamingo-mysql)
+[![GoDoc](https://godoc.org/github.com/tessig/flamingo-mysql?status.svg)](https://godoc.org/github.com/tessig/flamingo-mysql)
+[![Tests](https://github.com/tessig/flamingo-mysql/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/tessig/flamingo-mysql/actions/workflows/main.yml?query=branch%3Amaster+workflow%3ATests)
+[![Release](https://img.shields.io/github/release/tessig/flamingo-mysql?style=flat-square)](https://github.com/tessig/flamingo-mysql/releases)
+
 
 This flamingo module provides a simple MySQL implementation by wrapping 
 github.com/jmoiron/sqlx and a migration tool by wrapping github.com/golang-migrate/migrate 
