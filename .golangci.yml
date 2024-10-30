@@ -3,11 +3,8 @@ run:
   concurrency: 4
   timeout: 5m
   tests: true
-  # vendor$, third_party$, testdata$, examples$, Godeps$, builtin$
-  skip-dirs-use-default: true
   modules-download-mode: readonly
   allow-parallel-runners: false
-  go: '1.21'
 
 # output configuration options
 output:
@@ -19,7 +16,8 @@ output:
   # Example: "checkstyle:report.json,colored-line-number"
   #
   # Default: colored-line-number
-  format: colored-line-number
+  formats:
+    - format: colored-line-number
   print-issued-lines: true
   print-linter-name: true
   uniq-by-line: true
@@ -32,21 +30,20 @@ linters:
     - bodyclose
     - containedctx
     - contextcheck
+    - copyloopvar
     - cyclop
     - durationcheck
+    - err113
     - errcheck
     - errname
     - errorlint
     - exhaustive
-    - exportloopref
     - forbidigo
     - forcetypeassert
     - gocognit
     - goconst
     - gocritic
-    - goerr113
     - gofmt
-    - gomnd
     - gomoddirectives
     - gosec
     - gosimple
@@ -55,6 +52,7 @@ linters:
     - ineffassign
     - makezero
     - misspell
+    - mnd
     - nakedret
     - nestif
     - nilerr
@@ -87,9 +85,9 @@ issues:
     - path: _test\.go
       linters:
         - containedctx
+        - err113
         - forcetypeassert
         - goconst
-        - goerr113
         - varnamelen
         - wrapcheck
     # for tests, we prioritize readability over memory optimization
@@ -101,9 +99,6 @@ issues:
     - EXC0005
 
 linters-settings:
-  gomnd:
-    ignored-functions:
-      - context.WithTimeout
   govet:
     settings:
       printf:
@@ -111,6 +106,9 @@ linters-settings:
           - (flamingo.me/flamingo/v3/framework/flamingo.Logger).Debugf
     enable:
       - fieldalignment
+  mnd:
+    ignored-functions:
+      - context.WithTimeout
   nolintlint:
     require-specific: true
     require-explanation: true

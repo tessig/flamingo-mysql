@@ -39,15 +39,17 @@ func (s *Seeder) Seed() error {
 	err := filepath.Walk(s.seedsDirectory, func(path string, info os.FileInfo, err error) error {
 		if !info.IsDir() && filepath.Ext(info.Name()) == ".sql" {
 			logger.Info("Seed file %s ...", info.Name())
+
 			data, err := os.ReadFile(path)
 			if err != nil {
 				logger.Fatal("Problem while reading file content of %s:", info.Name())
 				panic(err)
 			}
+
 			logger.Info("Seeding file contents...")
+
 			s.db.Connection().MustExec(string(data))
 			logger.Info("Seeding complete...")
-
 		}
 
 		return nil

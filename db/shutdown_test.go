@@ -2,6 +2,7 @@ package db_test
 
 import (
 	"context"
+	"database/sql"
 	"testing"
 
 	"flamingo.me/flamingo/v3/framework/flamingo"
@@ -41,7 +42,6 @@ func TestShutdownSubscriber_Notify(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -49,7 +49,11 @@ func TestShutdownSubscriber_Notify(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			defer mockDB.Close()
+
+			defer func(mockDB *sql.DB) {
+				_ = mockDB.Close()
+			}(mockDB)
+
 			sqlxDB := sqlx.NewDb(mockDB, "sqlmock")
 
 			if tt.wantClose {
