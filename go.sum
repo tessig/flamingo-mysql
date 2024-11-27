@@ -4,6 +4,8 @@ filippo.io/edwards25519 v1.1.0 h1:FNf4tywRC1HmFuKW5xopWpigGjJKiJSV0Cqo0cJWDaA=
 filippo.io/edwards25519 v1.1.0/go.mod h1:BxyFTGdWcka3PhytdK4V28tE5sGfRvvvRV7EaN4VDT4=
 flamingo.me/dingo v0.2.10 h1:FAOsDtKHA+0KmAIdJYzsFNMMOCOMdVX4uAL8JPo6Z8M=
 flamingo.me/dingo v0.2.10/go.mod h1:5motgtzS2t26y20nndTLH7tslkBMg4GivTTn+ICQkl8=
+flamingo.me/dingo v0.3.0 h1:iTtuJ4j19nmeHQ1OQwEwcqyr+1H2THvzRbitZyzPAgU=
+flamingo.me/dingo v0.3.0/go.mod h1:qLXK+lP7NjMv1ir9Nf7qhxZ/RT3IPhSUkxwD7ZtuNgY=
 flamingo.me/flamingo/v3 v3.7.0 h1:XVIzVCkfexSooaFtXIV5DKqlTkvndsWMhdExxqXxMMI=
 flamingo.me/flamingo/v3 v3.7.0/go.mod h1:zGLA1HuC1/EMPsO8G8rrWsGhRUFDE2mmcIcZRUZAX6o=
 flamingo.me/flamingo/v3 v3.8.1 h1:tqBg2+cSZe/CrmIYQq8L1+QbEJTZ7J3TaL49qO4C/+c=
@@ -157,6 +159,8 @@ github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcU
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
 github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=
 github.com/stretchr/testify v1.9.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
+github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOfJA=
+github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/zemirco/memorystore v0.0.0-20160308183530-ecd57e5134f6 h1:j+ZgVPhfLkC3WDIqNCSpU2/Y67d2FNohAjrxR3HV+KQ=
 github.com/zemirco/memorystore v0.0.0-20160308183530-ecd57e5134f6/go.mod h1:PLhuixMlky6sB4/LEnpp1//u2BcRF2pKUYXLMVyOrIc=
 go.uber.org/atomic v1.7.0 h1:ADUqmZGgLDDfbSL9ZmPxKTybcoEYHgpYfELNoN+7hsw=

@@ -5,14 +5,14 @@ go 1.22
 toolchain go1.23.2
 
 require (
-	flamingo.me/dingo v0.2.10
+	flamingo.me/dingo v0.3.0
 	flamingo.me/flamingo/v3 v3.11.0
 	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/golang-migrate/migrate/v4 v4.17.1
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/spf13/cobra v1.8.1
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 )
 
 require (
