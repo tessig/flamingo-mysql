@@ -1,5 +1,18 @@
 # Changelog
 
+## Version v1.2.3 (2025-01-24)
+
+### Fixes
+
+- **deps:** update module github.com/golang-migrate/migrate/v4 to v4.18.1 (#23) (2cb43a4c)
+- **deps:** update module flamingo.me/flamingo/v3 to v3.12.0 (#29) (0aa6b4b3)
+- **deps:** update module flamingo.me/flamingo/v3 to v3.11.0 (#22) (22ec7493)
+
+### Chores and tidying
+
+- **deps:** update dependency go to v1.23.2 (#20) (88e037bd)
+- update go and golangci-lint versions (#24) (82b2b743)
+
 ## Version v1.2.2 (2024-05-24)
 
 ### Fixes
