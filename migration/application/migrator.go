@@ -104,5 +104,5 @@ func (m *Migrator) runMigration(migratorFunc func() error, steps *int) error {
 
 	logger.Info("Migrations complete")
 
-	return err
+	return nil
 }
