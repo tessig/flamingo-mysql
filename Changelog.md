@@ -1,5 +1,11 @@
 # Changelog
 
+## Version v1.2.4 (2025-03-20)
+
+### Fixes
+
+- erratic error returned from migrator.runMigration (#35) (f19820a8)
+
 ## Version v1.2.3 (2025-01-24)
 
 ### Fixes
