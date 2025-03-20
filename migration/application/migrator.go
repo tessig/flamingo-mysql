@@ -2,7 +2,6 @@ package application
 
 import (
 	"errors"
-	"fmt"
 	"os"
 
 	"flamingo.me/flamingo/v3/framework/flamingo"
@@ -105,5 +104,5 @@ func (m *Migrator) runMigration(migratorFunc func() error, steps *int) error {
 
 	logger.Info("Migrations complete")
 
-	return fmt.Errorf("db migration failed: %w", err)
+	return nil
 }
