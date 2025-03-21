@@ -2,7 +2,7 @@ module github.com/tessig/flamingo-mysql
 
 go 1.23
 
-toolchain go1.23.5
+toolchain go1.24.1
 
 require (
 	flamingo.me/dingo v0.3.0
