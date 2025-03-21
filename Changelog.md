@@ -1,5 +1,15 @@
 # Changelog
 
+## Version v1.3.1 (2025-03-21)
+
+### Fixes
+
+- cue marshal error when using int, fixed by using float and do casting (#40) (aeceef34)
+
+### Documentation
+
+- add new options to readme (9b7fb604)
+
 ## Version v1.3.0 (2025-03-21)
 
 ### Features
