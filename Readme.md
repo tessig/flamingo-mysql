@@ -25,6 +25,9 @@ db:
   user: "user"
   password: "password"
   maxConnectionLifetime: 0 # in seconds, 0 means to set nothing, negative values mean unlimited
+  maxOpenConnections: 0 # 0 means unlimited
+  maxIdleConnections: 0 # 0 means unlimited
+  maxConnectionIdleTime: 0 # in seconds, 0 means connections are not closed due to idle time
   # a set of additional connection options which are added as parameters to the DB URL
   connectionOptions: 
     myOption1: "myValue1" # all option values must be strings
