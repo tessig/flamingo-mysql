@@ -1,5 +1,17 @@
 # Changelog
 
+## Version v1.3.0 (2025-03-21)
+
+### Features
+
+- add more mysql connection settings (#37) (7599d736)
+
+### Fixes
+
+- **deps:** update module github.com/golang-migrate/migrate/v4 to v4.18.2 (#30) (c97102c9)
+- **deps:** update module github.com/go-sql-driver/mysql to v1.9.1 (#34) (9c8182a4)
+- **deps:** update module flamingo.me/flamingo/v3 to v3.13.0 (#33) (3ed66250)
+
 ## Version v1.2.4 (2025-03-20)
 
 ### Fixes
