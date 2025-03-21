@@ -8,7 +8,7 @@ require (
 	flamingo.me/dingo v0.3.0
 	flamingo.me/flamingo/v3 v3.13.0
 	github.com/DATA-DOG/go-sqlmock v1.5.2
-	github.com/go-sql-driver/mysql v1.8.1
+	github.com/go-sql-driver/mysql v1.9.1
 	github.com/golang-migrate/migrate/v4 v4.18.1
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/spf13/cobra v1.9.1
