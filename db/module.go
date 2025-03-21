@@ -35,8 +35,8 @@ type (
 		Username              string     `inject:"config:mysql.db.user,optional"`
 		Password              string     `inject:"config:mysql.db.password,optional"`
 		MaxConnectionLifetime float64    `inject:"config:mysql.db.maxConnectionLifetime,optional"`
-		MaxOpenConnections    int        `inject:"config:mysql.db.maxOpenConnections,optional"`
-		MaxIdleConnections    int        `inject:"config:mysql.db.maxIdleConnections,optional"`
+		MaxOpenConnections    float64    `inject:"config:mysql.db.maxOpenConnections,optional"`
+		MaxIdleConnections    float64    `inject:"config:mysql.db.maxIdleConnections,optional"`
 		MaxConnectionIdleTime float64    `inject:"config:mysql.db.maxConnectionIdleTime,optional"`
 	}
 )
@@ -68,8 +68,8 @@ mysql: {
 		user: string | *""
 		password: string | *""
 		maxConnectionLifetime: float | *0
-		maxOpenConnections: int | *0
-		maxIdleConnections: int | *0
+		maxOpenConnections: float | *0
+		maxIdleConnections: float | *0
 		maxConnectionIdleTime: float | *0
 		connectionOptions: DefaultConnectionOptions & {
 			[string]: string
@@ -110,11 +110,11 @@ func dbProvider(cfg *dbConfig, logger flamingo.Logger) DB {
 	}
 
 	if cfg.MaxOpenConnections != 0 {
-		dbConnection.SetMaxOpenConns(cfg.MaxOpenConnections)
+		dbConnection.SetMaxOpenConns(int(cfg.MaxOpenConnections))
 	}
 
 	if cfg.MaxIdleConnections != 0 {
-		dbConnection.SetMaxIdleConns(cfg.MaxIdleConnections)
+		dbConnection.SetMaxIdleConns(int(cfg.MaxIdleConnections))
 	}
 
 	if cfg.MaxConnectionIdleTime != 0 {
