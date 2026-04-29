@@ -1,14 +1,12 @@
 module github.com/tessig/flamingo-mysql
 
-go 1.23
-
-toolchain go1.23.5
+go 1.24.0
 
 require (
 	flamingo.me/dingo v0.3.0
 	flamingo.me/flamingo/v3 v3.13.0
 	github.com/DATA-DOG/go-sqlmock v1.5.2
-	github.com/go-sql-driver/mysql v1.9.1
+	github.com/go-sql-driver/mysql v1.10.0
 	github.com/golang-migrate/migrate/v4 v4.18.2
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/spf13/cobra v1.9.1
@@ -17,7 +15,7 @@ require (
 
 require (
 	cuelang.org/go v0.0.15 // indirect
-	filippo.io/edwards25519 v1.1.0 // indirect
+	filippo.io/edwards25519 v1.2.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/cockroachdb/apd/v2 v2.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
